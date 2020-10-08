@@ -1,0 +1,75 @@
+﻿@page
+@model Tasks.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create a task";
+}
+
+<h1>Create a task</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <h6 class="control-label">@Html.DisplayNameFor(model => model.taskDb.Title)</h6>
+                <input asp-for="taskDb.Title" class="form-control bg-white" required placeholder="Give your task a title"/>
+                <span asp-validation-for="taskDb.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h6 asp-for="taskDb.Title" class="control-label">@Html.DisplayNameFor(model => model.taskDb.Status)</h6>
+                <div class="switch">
+                    <label>
+                        Active
+                        <input type="checkbox" asp-for="taskDb.Status" />
+                        <span class="lever"></span>
+                        Finished
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6 class="control-label">@Html.DisplayNameFor(model => model.taskDb.Version)</h6>
+                <input asp-for="taskDb.Version" class="form-control bg-white" value="1.0.0"/>
+                <span asp-validation-for="taskDb.Version" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h6 asp-for="taskDb.Priority" class="control-label">@Html.DisplayNameFor(model => model.taskDb.Priority)</h6>
+                <div class="input-field s12 bg-white">
+
+                    <select asp-for="taskDb.Priority">
+                        <option value="" disabled selected>Choose the Priority</option>
+                        <option value="1">Low</option>
+                        <option value="2">Medium</option>
+                        <option value="3">High</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <h6 class="control-label">@Html.DisplayNameFor(model => model.taskDb.Deadline)</h6>
+                <div class="input-group date" data-provide="datepicker">
+                    <input asp-for="taskDb.Deadline" type="text" class="form-control bg-white" placeholder="Select a deadline">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <h6 class="control-label">Date Created</h6>
+                    <input asp-for="taskDb.Date" readonly="readonly" class="form-control bg-white" value="@DateTime.Now.ToString("dddd, dd MMMM yyyy, HH:mm")"/>
+                    <span asp-validation-for="taskDb.Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+</form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

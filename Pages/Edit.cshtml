@@ -1,0 +1,76 @@
+﻿@page
+@model Tasks.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit a task";
+}
+
+<h1>Edit</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="taskDb.Id" />
+            <div class="form-group">
+                <h6 class="control-label">@Html.DisplayNameFor(model => model.taskDb.Title)</h6>
+                <input asp-for="taskDb.Title" class="form-control bg-white" required /> <!-- I know im not using the full potential of materialize-->
+                <span asp-validation-for="taskDb.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h6 class="control-label">@Html.DisplayNameFor(model => model.taskDb.Status)</h6>
+                <div class="switch">
+                    <label>
+                        Active
+                        <input type="checkbox" asp-for="taskDb.Status" />
+                        <span class="lever"></span>
+                        Finished
+                    </label>
+                </div>
+            </div> 
+            <div class="form-group">
+                <h6 class="control-label">@Html.DisplayNameFor(model => model.taskDb.Version)</h6>
+                <input asp-for="taskDb.Version" class="form-control bg-white" />
+                <span asp-validation-for="taskDb.Version" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h6 class="control-label">@Html.DisplayNameFor(model => model.taskDb.Priority)</h6>
+                <div class="input-field s12 bg-white">
+
+                    <select asp-for="taskDb.Priority">
+                        <option value="" disabled selected>Choose the Priority</option>
+                        <option value="1">Low</option>
+                        <option value="2">Medium</option>
+                        <option value="3">High</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <h6 class="control-label">@Html.DisplayNameFor(model => model.taskDb.Deadline)</h6>
+                <div class="input-group date" data-provide="datepicker">
+                    <input asp-for="taskDb.Deadline" type="text" class="form-control bg-white" placeholder="Select a deadline">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <h6 class="control-label">Date issued</h6>
+                <input asp-for="taskDb.Date" class="form-control bg-white" />
+                <span asp-validation-for="taskDb.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

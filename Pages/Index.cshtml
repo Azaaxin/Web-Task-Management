@@ -1,0 +1,90 @@
+﻿@page
+@model Tasks.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Tasks of things that needs to be done";
+}
+
+<h1>Tasks</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table table-striped table-dark z-depth-3">
+    <thead class="bg-white text-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.taskDb[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.taskDb[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.taskDb[0].Version)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.taskDb[0].Priority)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.taskDb[0].Deadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.taskDb[0].Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.taskDb) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @if (item.Status == true)
+                {
+                    <p class="green-text darken-4">Done</p>
+                }
+                else
+                {
+                    <p class="orange-text darken-4">Active</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td>
+                @switch (item.Priority) // 0 = Not set, 1 = Low, 2 = Medium, 3 = High
+                {
+                    case 0:
+                        <p>Not set</p>
+                        break;
+                    case 1:
+                        <p>Low</p>
+                        break;
+                    case 2:
+                        <p>Medium</p>
+                        break;
+                    case 3:
+                        <p>High</p>
+                        break;
+                    default:
+                        <p>Not set</p>
+                        break;
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
