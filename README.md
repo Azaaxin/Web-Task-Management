@@ -19,6 +19,6 @@ Model for database:
 This is just a demo, for myself to learn how to use the language.
 
 
-*The project was made in one evening and there might be few bugs with the code, but the only one I have found so far is listing the status of a task in "Details". *
+*The project was made in one evening and there might be few bugs with the code, but the only one I have found so far is listing the status of a task in "Details".* 
 
 *Ludvig Olausson*
